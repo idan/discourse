@@ -1,5 +1,5 @@
 Django==1.2.4
-Fabric==0.9.2
+#Fabric==0.9.2
 South==0.7.2
 Unipath==0.2.1
 celery==2.1.3
