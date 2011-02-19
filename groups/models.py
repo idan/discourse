@@ -7,8 +7,7 @@ class InterestGroup(models.Model):
 
     name        = models.CharField(_('Name'), max_length=70, unique=True)
     public      = models.BooleanField(_('Public'), default=True)
-    slug        = models.SlugField(_('Slug'), max_length=70, blank=True,
-                    unique=True)
+    slug        = models.SlugField(_('Slug'), max_length=70, unique=True)
     description = models.TextField(_('Description'), blank=True, null=True)
     members     = models.ManyToManyField(User, related_name='interest_groups',
                     through='Membership', verbose_name=_('Members'))
