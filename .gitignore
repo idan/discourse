@@ -4,3 +4,4 @@
 *.wpr
 pip-log.txt
 *.db
+.ropeproject
