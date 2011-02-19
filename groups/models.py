@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 class InterestGroup(models.Model):
     """The group holding the events"""
@@ -11,6 +12,7 @@ class InterestGroup(models.Model):
     description = models.TextField(_('Description'), blank=True, null=True)
     members     = models.ManyToManyField(User, related_name='interest_groups',
                     through='Membership', verbose_name=_('Members'))
+    tags        = TaggableManager()
 
     class Meta:
         verbose_name = _('Interest group')
