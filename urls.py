@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
-
+from staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,3 +15,6 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     url(r'^$', 'groups.views.index', name='desourse_index'),
 )
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
