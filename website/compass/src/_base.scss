@@ -1,0 +1,9 @@
+$blueprint-grid-columns : 12;
+$blueprint-grid-width   : 60px;
+$blueprint-grid-margin  : 20px;
+$font-color             : #333;
+
+@import "compass/reset";
+@import "compass/utilities";
+@import "blueprint";
+@import "blueprint/grid";

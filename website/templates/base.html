@@ -3,16 +3,22 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>{% block title %}{% endblock %} - Discourse</title>
+    <link href="{{ STATIC_URL }}discourse/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}discourse/css/print.css" media="print" rel="stylesheet" type="text/css" />
+    <!--[if IE]>
+    <link href="{{ STATIC_URL }}discourse/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <![endif]-->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <header>
+    <header id="main" class="wrapper">
         <h1>Discourse</h1>
+        <nav>Nav menu here</nav>
     </header>
 {% block menu %}{% endblock %}
-{% block content %}{% endblock %}    
+{% block content %}{% endblock %}
 </body>
 </html>
