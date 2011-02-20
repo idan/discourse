@@ -12,6 +12,8 @@ class InterestGroup(models.Model):
     description = models.TextField(_('Description'), blank=True, null=True)
     members     = models.ManyToManyField(User, related_name='interest_groups',
                     through='Membership', verbose_name=_('Members'))
+    created     = models.DateTimeField(_('Created'), auto_now_add=True,
+                    blank=True, null=True)
     tags        = TaggableManager()
 
     class Meta:
