@@ -169,7 +169,7 @@ a img {
 #content {
   display: inline;
   float: left;
-  margin-right: 20px;
+  margin-right: 0;
   width: 700px;
 }
 /* line 139, ../../../../../../../../../../usr/lib/ruby/gems/1.9.1/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */

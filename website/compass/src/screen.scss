@@ -17,5 +17,5 @@
 }
 
 #content {
-    @include column(9);
+    @include column(9, true);
 }

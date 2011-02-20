@@ -1,2 +1,12 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}{% trans "Welcome" %}{% endblock %}
+{% block content %}
+<header>
+    <h1>{% trans "Groups" %}</h1>
+</header>
+<ul>
+    {% for group in public_groups  %}
+    <li>{{ group.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
