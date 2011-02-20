@@ -11,3 +11,11 @@
     h1 { @include column(4);}
     nav { @include column(8, true); }
 }
+
+#sidebar {
+    @include column(3);
+}
+
+#content {
+    @include column(9);
+}

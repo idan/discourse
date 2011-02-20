@@ -152,3 +152,27 @@ a img {
 * html #main nav {
   overflow-x: hidden;
 }
+
+/* line 15, ../../../compass/src/screen.scss */
+#sidebar {
+  display: inline;
+  float: left;
+  margin-right: 20px;
+  width: 220px;
+}
+/* line 139, ../../../../../../../../../../usr/lib/ruby/gems/1.9.1/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #sidebar {
+  overflow-x: hidden;
+}
+
+/* line 19, ../../../compass/src/screen.scss */
+#content {
+  display: inline;
+  float: left;
+  margin-right: 20px;
+  width: 700px;
+}
+/* line 139, ../../../../../../../../../../usr/lib/ruby/gems/1.9.1/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #content {
+  overflow-x: hidden;
+}

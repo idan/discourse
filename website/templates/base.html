@@ -14,11 +14,17 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <header id="main" class="wrapper">
-        <h1>Discourse</h1>
-        <nav>Nav menu here</nav>
-    </header>
-{% block menu %}{% endblock %}
-{% block content %}{% endblock %}
+    <div class="wrapper">
+        <header id="main">
+            <h1>Discourse</h1>
+            <nav>{% block menu %}Nav menu here{% endblock %}</nav>
+        </header>
+    </div>
+<div class="wrapper">
+    <nav id="sidebar">{% block sidebar %}sidebar {% endblock %}</nav>
+    <section id="content">
+    {% block content %}{% endblock %}
+    </section>
+</div>
 </body>
 </html>
