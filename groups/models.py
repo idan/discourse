@@ -6,14 +6,16 @@ from taggit.managers import TaggableManager
 class InterestGroup(models.Model):
     """The group holding the events"""
 
-    name        = models.CharField(_('Name'), max_length=70, unique=True)
+    name        = models.CharField(_('Name'), max_length=70, unique=True,
+                    db_index=True)
     public      = models.BooleanField(_('Public'), default=True)
-    slug        = models.SlugField(_('Slug'), max_length=70, unique=True)
+    slug        = models.SlugField(_('Slug'), max_length=70, unique=True,
+                    db_index=True)
     description = models.TextField(_('Description'), blank=True, null=True)
     members     = models.ManyToManyField(User, related_name='interest_groups',
                     through='Membership', verbose_name=_('Members'))
     created     = models.DateTimeField(_('Created'), auto_now_add=True,
-                    blank=True, null=True)
+                    blank=True, null=True, db_index=True)
     tags        = TaggableManager()
 
     class Meta:
