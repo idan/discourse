@@ -2,13 +2,14 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from managers import InterestGroupManager
 
 class InterestGroup(models.Model):
     """The group holding the events"""
 
     name        = models.CharField(_('Name'), max_length=70, unique=True,
                     db_index=True)
-    public      = models.BooleanField(_('Public'), default=True)
+    public      = models.BooleanField(_('Public'), default=True, db_index=True)
     slug        = models.SlugField(_('Slug'), max_length=70, unique=True,
                     db_index=True)
     description = models.TextField(_('Description'), blank=True, null=True)
@@ -17,6 +18,8 @@ class InterestGroup(models.Model):
     created     = models.DateTimeField(_('Created'), auto_now_add=True,
                     blank=True, null=True, db_index=True)
     tags        = TaggableManager()
+
+    objects     = InterestGroupManager()
 
     class Meta:
         verbose_name = _('Interest group')
