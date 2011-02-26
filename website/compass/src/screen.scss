@@ -7,7 +7,9 @@
 @import "base";
 
 .wrapper { @include container; }
-#main {
+#site-header {
+    @include column(12, true);
+    @include append-bottom;
     h1 { @include column(4);}
     nav { @include column(8, true); }
 }
@@ -18,4 +20,9 @@
 
 #content {
     @include column(9, true);
+}
+
+#site-footer {
+    @include column(12, true);
+    @include prepend-top;
 }
