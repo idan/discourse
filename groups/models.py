@@ -79,14 +79,24 @@ class Event(models.Model):
         return u'%(slug)s.%(group_slug)s' % {'group_slug':self.group.slug,
                 'slug': self.slug }
 
+TALK_TYPES = (
+    (0, _('Talk')),
+    (1, _('Lightning talks')),
+    (2, _('Break')),
+    (3, _('Open discussion')),
+    (2, _('Hacking')),
+    (2, _('Sprint')),
+)
+
 class Talk(models.Model):
     """Talks for an event"""
 
-    event   = models.ForeignKey(Event, verbose_name=_('Event'), related_name='talks')
-    title   = models.CharField(_('Talk title'), max_length=100)
-    content = models.TextField(_('Content'), blank=True, null=True)
-    start   = models.TimeField(_('Start time'), blank=True, null=True)
-    end     = models.TimeField(_('End time'), blank=True, null=True)
+    event     = models.ForeignKey(Event, verbose_name=_('Event'), related_name='talks')
+    title     = models.CharField(_('Talk title'), max_length=100)
+    content   = models.TextField(_('Content'), blank=True, null=True)
+    start     = models.TimeField(_('Start time'), blank=True, null=True)
+    end       = models.TimeField(_('End time'), blank=True, null=True)
+    talk_type = models.IntegerField(_('Talk type'), choices=TALK_TYPES, default=0)
 
     class Meta:
         verbose_name = _('Talk')
