@@ -1,5 +1,6 @@
 from django.contrib import admin
 from models import InterestGroup, Membership, Event, Talk
+from attachments.admin import AttachmentInlines
 
 class MembershipsInline(admin.TabularInline):
     model = Membership
@@ -17,6 +18,9 @@ class EventAdmin(admin.ModelAdmin):
     inlines = (TalksInline, )
     list_display = ('title', 'group', 'start', 'end', 'published')
     list_filter = ('group', 'published')
+    inlines = (TalksInline,
+               AttachmentInlines,
+              )
 
 admin.site.register(InterestGroup, InterestGroupAdmin)
 admin.site.register(Event, EventAdmin)
