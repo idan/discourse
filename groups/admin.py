@@ -13,7 +13,10 @@ class TalksInline(admin.StackedInline):
 
 
 class EventAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
     inlines = (TalksInline, )
+    list_display = ('title', 'group', 'start', 'end', 'published')
+    list_filter = ('group', 'published')
 
 admin.site.register(InterestGroup, InterestGroupAdmin)
 admin.site.register(Event, EventAdmin)
