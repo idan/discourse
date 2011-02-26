@@ -59,7 +59,7 @@ class Event(models.Model):
     group        = models.ForeignKey(InterestGroup, related_name='events',
                      verbose_name=_('Interest group'))
     title        = models.CharField(_('Event title'), max_length=100)
-    start        = models.DateTimeField(_('Event start'))
+    start        = models.DateTimeField(_('Event start'), db_index=True)
     end          = models.DateTimeField(_('Event end'), blank=True, null=True)
     description  = models.TextField(_('Description'), blank=True, null=True)
     slug         = models.SlugField(_('Slug'), max_length=50, unique=True,
