@@ -25,6 +25,9 @@ class InterestGroup(models.Model):
         verbose_name = _('Interest group')
         verbose_name_plural = _('Interest groups')
 
+    def __unicode__(self):
+        return self.name
+
 
 MEMBERSHIP_LEVELS = (
     (0, _('Limited')),
