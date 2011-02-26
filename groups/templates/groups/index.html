@@ -6,7 +6,7 @@
 </header>
 <ul>
     {% for group in public_groups  %}
-    <li>{{ group.name }}</li>
+    <li><a href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

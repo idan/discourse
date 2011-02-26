@@ -28,6 +28,9 @@ class InterestGroup(models.Model):
     def __unicode__(self):
         return self.name
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('group_detail', (), {'slug': self.slug})
 
 MEMBERSHIP_LEVELS = (
     (0, _('Limited')),

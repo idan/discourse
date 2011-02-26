@@ -13,7 +13,8 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     (r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'groups.views.index', name='desourse_index'),
+    url(r'^$', 'groups.views.index', name='discourse_index'),
+    (r'^groups/', include('groups.urls')),
 )
 
 if settings.DEBUG:
