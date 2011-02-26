@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
-from managers import InterestGroupManager
+from managers import InterestGroupManager, EventsManager
 
 class InterestGroup(models.Model):
     """The group holding the events"""
@@ -65,6 +65,8 @@ class Event(models.Model):
     registration = models.BooleanField(_('Registration required'), default=False)
     price        = models.DecimalField(_('Price'), max_digits=10,
                     decimal_places=2, blank=True, null=True)
+
+    objects      = EventsManager()
 
     class Meta:
         verbose_name = _('Event')

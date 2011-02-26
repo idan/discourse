@@ -12,3 +12,9 @@ class InterestGroupManager(models.Manager):
 
         return self.get_query_set().exclude(public=True)
 
+class EventsManager(models.Manager):
+
+    def published(self):
+        """Published events query set"""
+
+        return self.get_query_set().filter(published=True)
