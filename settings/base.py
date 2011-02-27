@@ -116,6 +116,9 @@ INSTALLED_APPS = (
     'django_extensions',
     'taggit',
     'south',
+    
+    'attachments',
+    
     'website',
     'groups',
     #'gunicorn',
