@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from managers import InterestGroupManager, EventsManager
+from datetime import date
 
 class InterestGroup(models.Model):
     """The group holding the events"""
@@ -31,6 +32,12 @@ class InterestGroup(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('group_detail', (), {'slug': self.slug})
+
+    def upcoming_events(self):
+        """Return upcoming published events for the group"""
+
+        events = self.events.filter(published=True, start__gte=date.today())
+        return events
 
 MEMBERSHIP_LEVELS = (
     (0, _('Limited')),
@@ -75,6 +82,7 @@ class Event(models.Model):
     class Meta:
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
+        ordering = ('start', )
 
     def __unicode__(self):
         """Show as event_slug.group_slug, e.g: ev17.pywebil"""

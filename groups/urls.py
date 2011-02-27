@@ -4,6 +4,7 @@ from models import InterestGroup
 
 groups_dict = {
     'queryset': InterestGroup.objects.public(),
+    'template_object_name': 'group',
 }
 
 urlpatterns = patterns('',
