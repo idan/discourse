@@ -1,5 +1,16 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}{% trans "Welcome" %}{% endblock %}
+{% block sidebar %}
+{{ block.super }}
+<header><h1>{% trans "Tags" %}</h1></header>
+<nav>
+    <ul>
+    {% for tag in tags %}
+    <li>{{ tag.name }}</li>
+    {% endfor %}
+    </ul>
+</nav>
+{% endblock %}
 {% block content %}
 <header>
     <h1>{% trans "Groups" %}</h1>
