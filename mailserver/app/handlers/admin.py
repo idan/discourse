@@ -4,8 +4,7 @@ import logging
 from lamson import view, queue
 from lamson.routing import route, stateless, route_like, state_key_generator
 from lamson.bounce import bounce_to
-from lamson.server import SMTPError
-from app.model import mailinglist, bounce, archive
+from app.model import mailinglist, archive
 from app.handlers import bounce
 
 
