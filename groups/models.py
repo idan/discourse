@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from managers import InterestGroupManager, EventsManager
+from datetime import date
 
 class InterestGroup(models.Model):
     """The group holding the events"""
@@ -51,6 +52,12 @@ class InterestGroup(models.Model):
             pass
         return None
     
+    def upcoming_events(self):
+        """Return upcoming published events for the group"""
+
+        events = self.events.filter(published=True, start__gte=date.today())
+        return events
+
 MEMBERSHIP_LEVELS = (
     (0, _('Limited')),
     (1, _('Full')),
@@ -79,7 +86,7 @@ class Event(models.Model):
     group        = models.ForeignKey(InterestGroup, related_name='events',
                      verbose_name=_('Interest group'))
     title        = models.CharField(_('Event title'), max_length=100)
-    start        = models.DateTimeField(_('Event start'))
+    start        = models.DateTimeField(_('Event start'), db_index=True)
     end          = models.DateTimeField(_('Event end'), blank=True, null=True)
     description  = models.TextField(_('Description'), blank=True, null=True)
     slug         = models.SlugField(_('Slug'), max_length=50,
@@ -96,6 +103,7 @@ class Event(models.Model):
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
         unique_together = (('group','slug'),)
+        ordering = ('start', )
 
     def __unicode__(self):
         """Show as event_slug.group_slug, e.g: ev17.pywebil"""

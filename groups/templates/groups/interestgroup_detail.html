@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{{ group.name }}{% endblock %}
+{% block content %}
+    <header><h1>{{ group.name }}</h1></header>
+    <article>
+        <header><h2>{% trans "Upcoming events" %}</h2></header>
+        <ul>
+        {% for event in group.upcoming_events %}
+        <li>{{ event.title }} <span>{{ event.start }}</span></li>
+        {% empty %}
+            <li>{% trans "No upcoming events" %}</li>
+        {% endfor %}
+        </ul>
+    </article>
+{% endblock %}
