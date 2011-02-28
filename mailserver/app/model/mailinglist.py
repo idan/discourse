@@ -66,7 +66,7 @@ def post_message(relay, message, group_name, host):
     if subject_mod not in delivery['subject']:
         delivery['subject'] = subject_mod + " " + delivery['subject']
 
-    for user_email in group.members.all().values('email'):
+    for user_email in group.members.values('email'):
 
         relay.deliver(delivery, To=user_email, From=list_addr)
 
