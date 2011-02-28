@@ -12,5 +12,6 @@ django-taggit==0.9.1
 #gunicorn==0.11.1
 python-memcached==1.45
 PIL>=1.1
+lamson==1.1
 
 -e git+git://github.com/shaib/django-attachments.git#egg=django-attachments

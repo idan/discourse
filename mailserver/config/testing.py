@@ -2,6 +2,7 @@ from config import settings
 from lamson import view
 from lamson.routing import Router
 from lamson.server import Relay
+import lamson.testing
 import jinja2
 import logging
 import logging.config
@@ -31,3 +32,4 @@ view.LOADER = jinja2.Environment(
 # if 'PYENCHANT_LIBRARY_PATH' not in os.environ:
 #     os.environ['PYENCHANT_LIBRARY_PATH'] = '/opt/local/lib/libenchant.dylib'
 
+#TODO: make something like this worklamson.testing.TEST_QUEUE = 'var/queue'

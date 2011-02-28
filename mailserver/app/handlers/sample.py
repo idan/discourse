@@ -1,3 +1,5 @@
+# This file is now disabled via config/boot.py
+
 import logging
 from lamson.routing import route, route_like, stateless
 from config.settings import relay
