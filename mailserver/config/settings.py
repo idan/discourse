@@ -14,13 +14,12 @@ receiver_config = {'host': 'localhost', 'port': 8823}
 
 handlers = ['app.handlers.bounce', 'app.handlers.admin']
 
-name = r'[0-9a-zA-Z]\w*' # letters, numbers and underscores but don't start with an underscore
+slug_re = r'[-\w]+' # letters, numbers and underscores but don't start with an underscore
 router_defaults = {'host': r'localhost', #TODO: CHANGEME AT DEPLOYMENT
-                   'group_name': name,
-                   'topic': name, # event or talk
+                   'group_name': slug_re,
+                   'topic': slug_re, # event or talk
                    'id_number': '[a-z0-9]+',
 }
-del name
 
 template_config = {'dir': 'app', 'module': 'templates'}
 

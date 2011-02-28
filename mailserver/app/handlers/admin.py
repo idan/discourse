@@ -16,7 +16,7 @@ INVALID_LISTS = ["noreply", "unbounce"]
 def module_and_to(module_name, message):
     name, address = parseaddr(message['to'])
     if '-' in address:
-        list_name = address.split('-')[0]
+        list_name = address.split('.')[0]
     else:
         list_name = address.split('@')[0]
 
@@ -33,7 +33,6 @@ def SPAMMING(message, **options):
 @route('(bad_list)@(host)', bad_list='.+')
 @route('(group_name)@(host)')
 @route('(group_name).(topic)@(host)')
-@route('(group_name)-subscribe@(host)')
 @bounce_to(soft=bounce.BOUNCED_SOFT, hard=bounce.BOUNCED_HARD)
 def START(message, group_name=None, topic=None, host=None, bad_list=None):
     #group_name = group_name.lower() if group_name else None
@@ -72,7 +71,7 @@ def START(message, group_name=None, topic=None, host=None, bad_list=None):
 
         return CONFIRMING_SUBSCRIBE
 
-@route('(group_name)-confirm-(id_number)@(host)')
+@route('(group_name).confirm.(id_number)@(host)')
 def CONFIRMING_SUBSCRIBE(message, group_name=None, id_number=None, host=None):
     #group_name = group_name.lower() if group_name else None
     host = host.lower() if host else None
@@ -96,7 +95,6 @@ def CONFIRMING_SUBSCRIBE(message, group_name=None, id_number=None, host=None):
         return CONFIRMING_SUBSCRIBE
 
 
-@route('(group_name)-(action)@(host)', action='[a-z]+')
 @route('(group_name).(topic)@(host)')
 @route('(group_name)@(host)')
 def POSTING(message, group_name=None, action=None, topic=None, host=None):
@@ -104,8 +102,8 @@ def POSTING(message, group_name=None, action=None, topic=None, host=None):
     #action = action.lower() if action else None
     host = host.lower() if host else None
 
-    if action == 'unsubscribe':
-        action = "unsubscribe from"
+    if topic == 'unsubscribe':
+        topic = "unsubscribe from"
         CONFIRM.send(relay, group_name, message, 'mail/confirmation.msg',
                           locals())
         return CONFIRMING_UNSUBSCRIBE
