@@ -32,6 +32,25 @@ class InterestGroup(models.Model):
     def get_absolute_url(self):
         return ('group_detail', (), {'slug': self.slug})
 
+    @property
+    def current_event(self):
+        #TODO
+        return None
+    
+    def find_topic(self, slug):
+        if slug=='current':
+            return self.current_event
+        try:
+            return self.events.get(slug=slug)
+        except Event.DoesNotExist:
+            pass
+        try:
+            # If it's not an event, maybe it's a talk
+            return Talk.objects.get(event__group=self, slug=slug)
+        except Talk.DoesNotExist:
+            pass
+        return None
+    
 MEMBERSHIP_LEVELS = (
     (0, _('Limited')),
     (1, _('Full')),
@@ -51,6 +70,7 @@ class Membership(models.Model):
     class Meta:
         verbose_name = _('Membership')
         verbose_name_plural = _('Memberships')
+        unique_together = ('user', 'group')
 
 
 class Event(models.Model):
@@ -62,7 +82,7 @@ class Event(models.Model):
     start        = models.DateTimeField(_('Event start'))
     end          = models.DateTimeField(_('Event end'), blank=True, null=True)
     description  = models.TextField(_('Description'), blank=True, null=True)
-    slug         = models.SlugField(_('Slug'), max_length=50, unique=True,
+    slug         = models.SlugField(_('Slug'), max_length=50,
                      help_text=_("Joined with group's slug forming the event's email address"))
     published    = models.BooleanField(_('Published'), default=False)
     location     = models.TextField(_('Location'), blank=True, null=True)
@@ -75,6 +95,7 @@ class Event(models.Model):
     class Meta:
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
+        unique_together = (('group','slug'),)
 
     def __unicode__(self):
         """Show as event_slug.group_slug, e.g: ev17.pywebil"""
@@ -100,7 +121,10 @@ class Talk(models.Model):
     start     = models.TimeField(_('Start time'), blank=True, null=True)
     end       = models.TimeField(_('End time'), blank=True, null=True)
     talk_type = models.IntegerField(_('Talk type'), choices=TALK_TYPES, default=0)
+    slug      = models.SlugField(_('Slug'), max_length=50, unique=True, default='invalid',
+                  help_text=_("Joined with event's group's slug forming the talk's email address"))
 
     class Meta:
         verbose_name = _('Talk')
         verbose_name_plural = _('Talks')
+        #unique_together = (('event__group','slug'),)
